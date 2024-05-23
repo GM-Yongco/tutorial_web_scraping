@@ -2,7 +2,10 @@ __pycache__
 settings.json
 
 a.txt
+b.txt
 
 *.png
 *.jpg
 *.jpeg
+
+00_test.py

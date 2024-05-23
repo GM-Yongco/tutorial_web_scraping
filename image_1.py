@@ -1,6 +1,6 @@
 # Author			: G.M. Yongco #BeSomeoneWhoCanStandByShinomiya
 # Date				: ur my date uwu
-# Description		: Code that will impress u ;)
+# Description		: to test if I can download images
 # HEADERS ================================================================
 import os
 import urllib.request as req
@@ -17,7 +17,7 @@ def separator(x:str = "SECTION") -> None:
 # FUNCTIONS SCRAPE
 # ========================================================================
 
-def download_img(url:str = "https://i.imgur.com/R10MS0w.png", file_name:str = "a.png") -> None:
+def download_img(url:str = "https://dynasty-scans.com/system/releases/000/041/912/05.webp", file_name:str = "a.png") -> None:
 	# check if scraped folder exists
 	path = "00_Scraped/"
 	if(os.path.exists(path) == False):
@@ -32,6 +32,7 @@ def download_img(url:str = "https://i.imgur.com/R10MS0w.png", file_name:str = "a
 
 def main():
 	link1 = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiayevwGfXu1HJ8TU-5l5r0u0LVQDxKeoNEWZAMmXohT-_oxazsk8pSYPQPczzUk5BIrd-vaE1jMdquWununVHUuxSKr8f7WBM94tr2ZP6gVXGu9_euMWuTwzlCJ194gErnPKgcBYbcVjZqMbFWE9eFMFkNY1qsfktvoC6Tl5qrmwHJcPJeJU4VBSFn/s2992/002.jpg"
+	# link1 = "https://dynasty-scans.com/system/releases/000/041/912/05.webp"
 	download_img(link1)
 
 if __name__ == '__main__':
