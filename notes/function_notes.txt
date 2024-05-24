@@ -1,0 +1,30 @@
+
+urllib.request.urlretrieve(url, filename=None, reporthook=None, data=None)
+
+==================================================
+ PARAMS
+==================================================
+	url 
+		(str): The URL of the resource to be retrieved.
+	filename (str or file-like object, optional): 
+		The location where the file should be saved. 
+		If not specified, a temporary file will be created.
+	reporthook (callable, optional): 
+		A function that will be called once on establishment of the network connection 
+		and once after each block read thereafter. 
+		The function is called as reporthook(blocknum, blocksize, totalsize).
+		blocknum (int): The current block number.
+		blocksize (int): The size of the block.
+		totalsize (int): The total size of the download. If this parameter is -1, it means the size is unknown.
+	data (bytes or None, optional):
+		Data to send with a POST request.
+		If data is specified, a POST request will be made; 
+		otherwise, a GET request is made.
+
+==================================================
+ RETURN VALUE
+==================================================
+	The function returns a tuple (filename, headers), where:
+
+	filename (str): The local file name under which the object can be found.
+	headers (HTTPMessage): The headers of the retrieved resource.
