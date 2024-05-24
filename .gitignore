@@ -3,6 +3,9 @@ settings.json
 
 a.txt
 b.txt
+c.txt
+d.txt
+e.txt
 
 *.png
 *.jpg
