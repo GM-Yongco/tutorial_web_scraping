@@ -49,4 +49,22 @@ with similar but diffierent ish links for pannels
 	ch1 pannel 1: https://xfs-n01.xfspp.com/comic/2002/62c/6384a773cddc18516a069c26/44271760_1200_1702_549240.jpeg
 	ch1 pannel 2: https://xfs-n07.xfspp.com/comic/2002/62c/6384a773cddc18516a069c26/44271762_1200_1704_516065.jpeg
 
+==================================================
+ MISC
+==================================================
+or whatever you call this template for manga sites
+https://ajinmanga.online/
+https://housekinokunimanga.com/
+https://www.chainsaw-man-manga.online/
 
+there are some variance in how they store their images but most are scrapable
+	ajin	: https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi4b-cPrsYmAOwBz_-P7YRn5xx_YZm2ZOEdVWqse-HXqoOcCVvS0mw0E9U7YZq7Y_mxPlDs1dLsp_96HowTspXqzhz69CpJdkABCYYq1zNOEX9cIAKGLrdsxWpYta3uQsV60NWufVcFjUMEXKvLeVwWjTxwoojXUQmpTgHxDb8qISPjFiok41v_Zr456w/s1600/03.jpg
+	hoseki 	: https://1.bp.blogspot.com/-NyUZOTTQ9JM/Xc3sDA9_ZpI/AAAAAAAAAG4/vh_0iamEeQ8AvmCyBw9efaDmHCi2Qnd3QCLcBGAsYHQ/s1600/026.jpg
+	chainsaw: https://sun9-48.userapi.com/impf/-TvecRl2Ib-a-cGX7jWMc4TA9yLfpsKEkIhYqw/nx-jyIKhZtE.jpg?size=740x1080&quality=96&sign=3c6c32e715847febe54f7e5ec9fb0691&type=album
+
+	among the three, only chainsaw isnt scrapable
+	maybe its the blog sites they store it in??
+	
+	addendum: hoseki has security where you cant (ctrl + i) 
+	but you can still access developer tools witht the chrome settings 
+	and can still scrape with requests

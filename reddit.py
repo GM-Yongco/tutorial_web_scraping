@@ -3,7 +3,6 @@
 # Date            : ur my date uwu
 # HEDERS =================================================================
 
-import os
 from selenium import webdriver
 from bs4 import BeautifulSoup as bs
 from urllib.request import Request, urlopen, urlretrieve
@@ -93,7 +92,7 @@ def main():
 
 	for link in image_links:
 		print(link)
-		urlretrieve(link, f"00_Scraped/ZZ_reddit_{subreddit}_{modifier}.png")
+		urlretrieve(link, f"00_Scraped/reddit_{subreddit}_{modifier}.png")
 		
 
 
