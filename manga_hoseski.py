@@ -7,6 +7,8 @@ import os
 from bs4 import BeautifulSoup as bs
 from urllib.request import Request, urlopen, urlretrieve
 
+from manga_class import *
+
 # ========================================================================
 # FUNCTIONS MISC
 # ========================================================================
@@ -66,10 +68,13 @@ def get_html(url:str = "https://chihuahuaspin.com/") -> str:
 # ========================================================================
 
 def get_chapter_images(chapter_link:str = "https://housekinokunimanga.com/manga/houseki-no-kuni-chapter-2/")->None:
+	chapter = MangaChapter()
+	chapter.change_chapter_link(chapter_link)
+
 	chapter_html = get_html(chapter_link)
 
 	for element in bs(chapter_html, "html.parser").find_all("img", class_ = "lazy lazy-hidden"):
-		print(element.get("data-src"))
+		chapter.add_pannel_link(element.get("data-src"))
 
 	write(chapter_html, "c.txt")
 
