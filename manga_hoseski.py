@@ -49,10 +49,7 @@ def download_img(
 		os.makedirs(path)
 
 	path = "00_Scraped/" + file_name
-	try:
-		urlretrieve(url, path)
-	except Exception as e:
-		separator(f"error: {e}")
+	urlretrieve(url, path)
 
 def get_html(url:str = "https://chihuahuaspin.com/") -> str:
 	request_site = Request(url, headers={"User-Agent": "Mozilla/5.0"})
@@ -67,16 +64,20 @@ def get_html(url:str = "https://chihuahuaspin.com/") -> str:
 # FUNCTIONS SCRAPE HOSEKI SPECIFIC
 # ========================================================================
 
-def get_chapter_images(chapter_link:str = "https://housekinokunimanga.com/manga/houseki-no-kuni-chapter-2/")->None:
-	chapter = MangaChapter()
-	chapter.change_chapter_link(chapter_link)
+def get_chapter_details(
+		chapter_link:str = "https://housekinokunimanga.com/manga/houseki-no-kuni-chapter-2/"
+	)->MangaChapterDetails:
+	
+	chapter = MangaChapterDetails()
+	chapter.set_chapter_link(chapter_link)
+	chapter.set_chapter_num(int((chapter_link.replace('/', '').split('-'))[-1]))
 
 	chapter_html = get_html(chapter_link)
 
 	for element in bs(chapter_html, "html.parser").find_all("img", class_ = "lazy lazy-hidden"):
 		chapter.add_pannel_link(element.get("data-src"))
 
-	write(chapter_html, "c.txt")
+	return chapter
 
 
 # ========================================================================
@@ -84,7 +85,31 @@ def get_chapter_images(chapter_link:str = "https://housekinokunimanga.com/manga/
 # ========================================================================
 
 def main():
-	get_chapter_images()
+	first:MangaChapterDetails = get_chapter_details()
+	first.print_attributes()
+
+	unsucessful:list = []
+	for index, elements in enumerate(first.pannel_links):
+		try:
+			download_img(elements, f"hoseki_chapter_{first.chapter_num}/{index+1}.png")
+			print(f"success: pannel {index+1}")
+		except:
+			unsucessful.append(index)
+			print(f"unsuccessfull: pannel {index+1}")
+
+	separator("getting unsuccessfuls")
+
+	while (len(unsucessful) != 0):
+		for elements in unsucessful:
+			try:
+				download_img(first.pannel_links[elements], f"hoseki_chapter_{first.chapter_num}/{elements+1}.png")
+				print(f"success: pannel {elements+1}")
+				unsucessful.remove(elements)
+			except:
+				print(f"unsuccessfull: pannel {elements+1}")
+
+
+
 
 
 if __name__ == '__main__':

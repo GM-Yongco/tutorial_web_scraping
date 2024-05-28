@@ -32,8 +32,9 @@ class MangaChapterDetails:
 		self.pannel_links.append(new_pannel_link)
 	
 	def print_attributes(self):
+		print(f"Chapter: {self.chapter_num}")
 		print(self.chapter_link)
-		for elements in self.add_pannel_link:
+		for elements in self.pannel_links:
 			print(f"\t{elements}")
 
 # ========================================================================
@@ -57,5 +58,4 @@ class MangaDetails:
 	def print_attributes(self):
 		print(self.manga_link)
 		for elements in self.manga_chapters:
-			print(f"Chapter: {elements.get_chapter_num}")
 			elements.print_attributes()
