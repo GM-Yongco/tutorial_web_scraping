@@ -65,6 +65,7 @@ there are some variance in how they store their images but most are scrapable
 	among the three, only chainsaw isnt scrapable
 	maybe its the blog sites they store it in??
 	
-	addendum: hoseki has security where you cant (ctrl + i) 
-	but you can still access developer tools witht the chrome settings 
-	and can still scrape with requests
+	addendum: 
+		hoseki has security where you cant (ctrl + i) 
+		but you can still access developer tools witht the chrome settings 
+		and can still scrape with requests
