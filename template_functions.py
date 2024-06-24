@@ -5,7 +5,7 @@
 
 import os
 from bs4 import BeautifulSoup as bs
-from urllib.request import Request as req, urlopen, urlretrieve
+from urllib.request import Request, urlopen, urlretrieve
 
 # ========================================================================
 # FUNCTIONS MISC
@@ -51,12 +51,12 @@ def download_img(
 
 	path = "00_Scraped/" + file_name
 	try:
-		req.urlretrieve(url, path)
+		urlretrieve(url, path)
 	except Exception as e:
 		print(e)
 
 def get_html(url:str = "https://chihuahuaspin.com/"):
-	request_site = req(url, headers={"User-Agent": "Mozilla/5.0"})
+	request_site = Request(url, headers={"User-Agent": "Mozilla/5.0"})
 	page = urlopen(request_site)
 
 	html = (page.read().decode(("utf-8")))
