@@ -19,7 +19,7 @@ if __name__ == '__main__':
 
 
 	# get img from link
-	link_image = "https:/xfs-n18.xfspp.com/comic/5003/962/628073bbfe272d6dc98e8269/15928920_1444_2048_1035819.jpeg"
+	link_image = "https://dynasty-scans.com/system/releases/000/039/165/01.webp"
 	download_img(link_image)
 
 	separator("END")

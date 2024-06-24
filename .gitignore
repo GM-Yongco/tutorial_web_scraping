@@ -11,5 +11,5 @@ e.txt
 *.jpg
 *.jpeg
 
-01-template-test.py
-02-Area51.py
+00_Area51.py
+template_test.py
