@@ -2,60 +2,104 @@
 # Date				: ur my date uwu
 # Description		: A template class to 
 # HEADERS ================================================================
+import os
+import urllib.request as req
 from typing import List
 
 # ========================================================================
 # CLASSES
 # ========================================================================
 
-class MangaChapterDetails:
-	def __init__(self, chapter_link:str = "0"):
-		self.chapter_num:float = -1
-		self.chapter_link:str = chapter_link
-		self.pannel_links:List[str] = []
+class MangaPannel:
+	def __init__(self, pannel_link: str) -> None:
+		self._pannel_link: str = pannel_link
+		self._downloaded: bool = False
+
+	def download(
+		self,
+		file_name:str = "manga_pannel.png",
+		file_path:str = "00_Scraped/"
+		)->None:
+
+		try:
+			req.urlretrieve(self._pannel_link, f"{file_path}{file_name}")
+		except Exception as e:
+			print(e)
+		else:
+			self._downloaded = True
 	
-	# getters and setters
+	def __str__(self):
+		return f"status: {self._downloaded}\t{self._pannel_link}"
 
-	def set_chapter_num(self, chapter_num:int):
-		self.chapter_num = chapter_num
-	def get_chapter_num(self):
-		return self.chapter_num
 
-	def set_chapter_link(self, chapter_link:str):
-		self.chapter_link = chapter_link
-	def get_chapter_link(self):
-		return self.chapter_link
+# ========================================================================
+class MangaChapter:
+	def __init__(self, 
+		chapter_link:str = "0",
+		chapter_title:str = "chapter_title"
+		)-> None:
 
-	# core functions
+		self._chapter_link:str = chapter_link
+		self._chapter_title:str = chapter_title
+		self._chapter_folder_created:bool = False
+		self._pannels:List[MangaPannel] = []
 
-	def add_pannel_link(self, new_pannel_link):
-		self.pannel_links.append(new_pannel_link)
+	def add_pannel(self, pannel_link:str):
+		self._pannels.append(MangaPannel(pannel_link))
 	
-	def print_attributes(self):
-		print(f"Chapter: {self.chapter_num}")
-		print(self.chapter_link)
-		for elements in self.pannel_links:
-			print(f"\t{elements}")
+	def create_folder(self, manga_title:str = "manga_title"):
+		try:
+			path = fr"00_Scraped/{manga_title}/{self._chapter_title}"
+			if os.path.exists(path) == False:
+				os.makedirs(path)
+		except Exception as e:
+			print(e)
+		else:
+			self._chapter_folder_created = True
+		
+	def __str__(self):
+		retval:str = f"{self._chapter_title}:{self._chapter_link}"
+		retval = retval + ("-"*50)
+
+		for elements in self._pannels:
+			retval = retval + str(elements)
+
+		retval = retval + ("-"*50)
+
+		return retval
 
 # ========================================================================
 class MangaDetails:
-	def __init__(self, manga_link:str = "0"):
-		self.manga_link:str = manga_link
-		self.manga_chapters:List[MangaChapterDetails] = []
+	def __init__(self, 
+		manga_link:str = "0",
+		manga_title:str = "manga_title"
+		)-> None:
 
-	# getters and setters
+		self._manga_link:str = manga_link
+		self._manga_title:str = manga_title
+		self._manga_folder_created:bool = False
+		self._chapters:List[MangaChapter] = []
 
-	def set_manga_link(self, manga_link):
-		self.manga_link = manga_link
-	def get_manga_link(self):
-		return self.manga_link
+	def add_chapter(self, chapter_link, chapter_title):
+		self._manga_chapters.append(MangaChapter(chapter_link, chapter_title))
 
-	# core functions
+	def create_folder(self):
+		try:
+			path = fr"00_Scraped/{self._manga_title}"
+			if os.path.exists(path) == False:
+				os.makedirs(path)
+		except Exception as e:
+			print(e)
+		else:
+			self._manga_folder_created = True
 
-	def add_chapter(self, manga_chapter:MangaChapterDetails):
-		self.manga_chapters.append(manga_chapter)
+	def __str__(self):
+		retval:str = f"{self._manga_title}:{self._manga_link}"
+		retval = retval + ("="*50)
 
-	def print_attributes(self):
-		print(self.manga_link)
-		for elements in self.manga_chapters:
-			elements.print_attributes()
+		for elements in self._chapters:
+			retval = retval + str(elements)
+
+		retval = retval + ("="*50)
+
+		return retval

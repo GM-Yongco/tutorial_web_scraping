@@ -16,14 +16,14 @@ manga_pannel: object
 	downloaded:bool
 
 manga_chapter: object
-	chapter_title:str
 	chapter_link:str
+	chapter_title:str
 	chapter_file_created:bool
-	pannel_links:List[manga_pannel]
+	manga_pannels:List[manga_pannel]
 
 manga: object
-	manga_title:str
 	manga_link:str
+	manga_title:str
 	manga_file_created:bool
 	manga_chapters:List[manga_chapter]
 
@@ -32,6 +32,7 @@ manga: object
 pros:
 	gives me practice in using classes
 	readable storing of data
+		I can have a json file for every manga I scrape
 	polymorphism for future manga downloading endeavors
 	attributes can be imported into json file easily
 cons:
@@ -83,4 +84,7 @@ cons:
 ==================================================
 
 both can use multithreading fine(i think)
-	at least i can think of ways to do both
+	i can think of ways to do both at least
+
+I decided to use the class based one for the readabile json file
+	i need practice in class accessing and turning themm to json files anyways
