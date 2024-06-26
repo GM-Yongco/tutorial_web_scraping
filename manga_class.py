@@ -27,12 +27,14 @@ class MangaPannel:
 		file_path = f"00_Scraped/{file_path}{file_name}"
 
 		try:
+			print(f"star download \t\t: {file_name}")
 			response = requests.get(self._pannel_link, timeout = 60)
 			open(file_path, 'wb').write(response.content)
 		except Exception as e:
+			print(f"download failed\t: {file_name}")
 			print(e)
 		else:
-			print("download success")
+			print(f"download success\t\t: {file_name}")
 			self._downloaded = True
 	
 # ========================================================================
@@ -49,10 +51,10 @@ class MangaChapter:
 
 	def __str__(self)->None:
 		retval:str = f"{self._chapter_title}:{self._chapter_link}"
-		retval = retval + ("-"*50)
+		retval = retval + ("\n") + ("-"*50)
 		for elements in self._pannels:
-			retval = retval + str(elements)
-		retval = retval + ("-"*50)
+			retval = retval + ("\n") + str(elements)
+		retval = retval + ("\n") + ("-"*50)
 
 		return retval
 	
@@ -71,6 +73,10 @@ class MangaChapter:
 	def add_pannel(self, pannel_link:str)->None:
 		self._pannels.append(MangaPannel(pannel_link))
 
+	def download_chapter(self):
+		for index, links in enumerate(self._pannels):
+			links.download_pannel(file_path = self._chapter_title ,  file_name = f"{index}.png")
+ 
 	def get_pannel_links()->None:
 		pass
 		

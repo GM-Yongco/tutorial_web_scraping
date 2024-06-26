@@ -3,10 +3,11 @@
 # Description		: A template class to 
 # HEADERS ================================================================
 
+from typing import List
 from manga_class import *
 
-import requests
 from bs4 import BeautifulSoup as bs
+import requests
 
 # ========================================================================
 # FUNCTIONS MISC
@@ -20,7 +21,7 @@ def separator(x:str = "SECTION") -> None:
 # GLOBAL
 # ========================================================================
 
-DYNASTY_LINK:str = "https://dynasty-scans.com/"
+DYNASTY_LINK:str = "https://dynasty-scans.com"
 
 # ========================================================================
 # CLASSES
@@ -29,19 +30,35 @@ DYNASTY_LINK:str = "https://dynasty-scans.com/"
 class DynastyMangaChapter(MangaChapter):
 
 	def get_pannel_links(self)->None:
-		response: requests.Response = requests.get(self._chapter_link)
-		soup: bs = bs(response.text, 'html.parser')
+		# getting html of the chapter
+		response:requests = requests.get(self._chapter_link)
+		soup:bs = bs(response.text , 'html.parser')
 
-		img_src = DYNASTY_LINK + soup.find_all('img')[1].get('src')
-		self.add_pannel(img_src)
-		
+		# getting page links
+		nav_div:bs = soup.find("div", class_= fr"pages-list")
+		nav_a_list:List[bs] = nav_div.find_all("a", class_="page")
+
+		# getting image prefix
+		img_link_suffxies:List[str] = []
+		for a in nav_a_list:
+			img_link_suffxies.append(a.get_text())
+
+		# getting image prefix
+		images:List[bs] = soup.find_all('img')
+		images_link:str = (images[1]).get('src')
+		portions:List[str] = images_link.split("/")
+		del portions[0]
+		del portions[-1]
+
+		img_link_prefix:str = DYNASTY_LINK + '/'
+		for p in portions:
+			img_link_prefix  = img_link_prefix + p + '/'
+
+		# getting the image pannel links / mixing prefix and suffix
+		for s in img_link_suffxies:
+			self.add_pannel(f"{img_link_prefix}{s}.webp")
+
 		separator("GOT PANNEL LINKS")
-
-	def download_pannels(self)->None:
-		for pannels in self._pannels:
-			pannels.download_pannel()
-		
-		separator("CHAPTER DOWNLOADED")		
 
 # ========================================================================
 # MAIN
@@ -50,10 +67,11 @@ class DynastyMangaChapter(MangaChapter):
 if __name__ == '__main__':
 	separator("START")
 
-	chapter_link = "https://dynasty-scans.com/chapters/the_guy_she_was_interested_in_wasnt_a_guy_at_all_ch01"
+	chapter_link = "https://dynasty-scans.com/chapters/the_guy_she_was_interested_in_wasnt_a_guy_at_all_ch00"
 	chapter: DynastyMangaChapter = DynastyMangaChapter(chapter_link)
 
 	chapter.get_pannel_links()
-	chapter.download_pannels()
+	chapter.create_folder()
+	chapter.download_chapter()
 
 	separator("END")
