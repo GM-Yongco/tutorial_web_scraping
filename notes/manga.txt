@@ -22,16 +22,28 @@ i would be able to download youtube vidoes me thinks
 i made the dynasty one but downloading photos is slow af
 	i need to make a timeout then retry FUNCTIONS
 
-they have consistent pannel chapters
+they have consistent pannel page links
 	ch1 pannel 1: https://dynasty-scans.com/chapters/the_guy_she_was_interested_in_wasnt_a_guy_at_all_ch01#1
 	ch1 pannel 2: https://dynasty-scans.com/chapters/the_guy_she_was_interested_in_wasnt_a_guy_at_all_ch01#2
 	ch1 pannel 3: https://dynasty-scans.com/chapters/the_guy_she_was_interested_in_wasnt_a_guy_at_all_ch01#3
 	ch1 pannel 4: https://dynasty-scans.com/chapters/the_guy_she_was_interested_in_wasnt_a_guy_at_all_ch01#4
-unlike their pannel links
+unlike their image links
+	chapter 00
 	pannel 1: https://dynasty-scans.com/system/releases/000/039/165/01.webp
 	pannel 2: https://dynasty-scans.com/system/releases/000/039/165/02.webp
 	pannel 3: https://dynasty-scans.com/system/releases/000/039/165/03-04.webp
 	because pannel 3 and 4 were stitched together cuz a whole page drawing
+	compare it with chapter 1 where there are also no leading 0s on the image links
+	pannel 1: https://dynasty-scans.com/system/releases/000/036/237/1.webp
+	pannel 2: https://dynasty-scans.com/system/releases/000/036/237/2.webp
+	pannel 3: https://dynasty-scans.com/system/releases/000/036/237/3.webp
+	pannel 4: https://dynasty-scans.com/system/releases/000/036/237/4.webp
+
+
+their pannel links always give the first pannel when using requests
+	I can never get the pannel link image href to give me the second image of the chapter
+	might be possible using selenium
+	but not now
 
 ==================================================
  MANGAPARK

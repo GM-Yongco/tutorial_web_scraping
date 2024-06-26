@@ -4,6 +4,7 @@
 # HEADERS ================================================================
 
 import os
+import requests
 from bs4 import BeautifulSoup as bs
 from urllib.request import Request, urlopen, urlretrieve
 
@@ -55,7 +56,7 @@ def download_img(
 	except Exception as e:
 		print(e)
 
-def get_html(url:str = "https://chihuahuaspin.com/"):
+def get_html(url:str = "https://chihuahuaspin.com/")->str:
 	request_site = Request(url, headers={"User-Agent": "Mozilla/5.0"})
 	page = urlopen(request_site)
 
@@ -63,3 +64,8 @@ def get_html(url:str = "https://chihuahuaspin.com/"):
 	html = str(html.encode('utf-8'))
 
 	return html
+
+def get_html_old(url:str = "https://chihuahuaspin.com/")->bs:
+	response:requests = requests.get(url)
+	soup:bs = bs(response.text, 'html.parser')
+	return soup
