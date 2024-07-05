@@ -9,15 +9,14 @@ from template_functions import *
 # MAIN 
 # ========================================================================
 
-
 if __name__ == '__main__':
 	separator("START")
 
 	# get html of a site
-	link_page = "https://dynasty-scans.com/chapters/the_guy_she_was_interested_in_wasnt_a_guy_at_all_ch00#2"
+	link_page = "https://dynasty-scans.com/doujins/bocchi_the_rock"
 	print(link_page)
-	write(get_html(link_page))
-	write(get_html_old(link_page), "b.txt")
+	write(content = get_html_urllib(link_page))
+	write(get_html_request(link_page), "b.txt")
 
 
 	# get img from link
