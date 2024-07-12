@@ -1,0 +1,50 @@
+they cant be 
+
+# pound
+% percent
+& ampersand
+{ left curly bracket
+} right curly bracket
+\ back slash
+< left angle bracket
+> right angle bracket
+* asterisk
+? question mark
+/ forward slash
+  blank spaces
+$ dollar sign
+! exclamation point
+' single quotes
+" double quotes
+: colon
+@ at sign
++ plus sign
+` backtick
+| pipe
+= equal sign
+
+here they are in a python list
+symbols = [
+    r"#",
+    r"%",
+    r"&",
+    r"{",
+    r"}",
+    r"\",
+    r"<",
+    r">",
+    r"*", 
+    r"?", 
+    r"/",
+    r" ", 
+    r"$", 
+    r"!", 
+    r"'", 
+    r'"', 
+    r":", 
+    r"@", 
+    r"+", 
+    r"`", 
+    r"|", 
+    r"="
+]

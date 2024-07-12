@@ -28,3 +28,7 @@ urllib.request.urlretrieve(url, filename=None, reporthook=None, data=None)
 
 	filename (str): The local file name under which the object can be found.
 	headers (HTTPMessage): The headers of the retrieved resource.
+
+====================================================================================================
+import requests
+====================================================================================================
