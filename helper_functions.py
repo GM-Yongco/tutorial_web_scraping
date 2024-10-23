@@ -4,10 +4,13 @@
 # HEADERS ================================================================
 
 import os
-import requests
 from selenium import webdriver
 from bs4 import BeautifulSoup as bs
-from urllib.request import Request, urlopen, urlretrieve
+
+from urllib.request import Request as request_urllib, urlopen, urlretrieve
+
+# this kind of requests is from the internet and not built in to python
+import requests as requests_web
 
 # ========================================================================
 # FUNCTIONS MISC
@@ -28,6 +31,7 @@ def separator(x:str = "SECTION") -> None:
 # FUNCTIONS TEST
 # ========================================================================
 
+# usually used to check html content
 def write(content:str = "test", file_name:str = "a.txt") -> None:
 	# check if references folder exists
 	path = "00_REFERENCES/"
@@ -66,13 +70,55 @@ def download_img(
 	except Exception as e:
 		print(e)
 
+def download_img_requests_1(
+		url:str = "https://cmdxd98sb0x3yprd.mangadex.network/data/6a1dc564d87990ecac5f35603d1e6079/1-3638507e77498c1bae0e9fde1a1da2a360cf34b78228f9eeacd8c129931f0bdc.jpg", 
+		file_name:str = "a.png"
+	) -> None:
+	path = "00_Scraped/"
+	if(os.path.exists(path) == False):
+		os.makedirs(path)
+
+	path = "00_Scraped/" + file_name
+
+	try:
+		response:requests_web.Response = requests_web.get(url, stream=True)
+		response.raise_for_status()  # Raise an exception for error responses
+
+		with open(file_name, 'wb') as f:
+			for chunk in response.iter_content(chunk_size=8192):
+				if chunk:  # Filter out keep-alive new chunks
+					f.write(chunk)
+	except Exception as e:
+		print(e)
+	else:
+	    print("Image downloaded successfully!")
+
+def download_img_requests_2(
+		url:str = "https://cmdxd98sb0x3yprd.mangadex.network/data/6a1dc564d87990ecac5f35603d1e6079/1-3638507e77498c1bae0e9fde1a1da2a360cf34b78228f9eeacd8c129931f0bdc.jpg", 
+		file_name:str = "a.png"
+	) -> None:
+	path = "00_Scraped/"
+	if(os.path.exists(path) == False):
+		os.makedirs(path)
+	path = "00_Scraped/" + file_name
+	
+    # no need keep alive chunks if not streaming
+	try:
+		response:requests_web.Response = requests_web.get(url)
+		with open(file_name, 'wb') as f:
+			f.write(response.content)
+	except Exception as e:
+		print(e)
+	else:
+	    print("Image downloaded successfully!")
+
 # ========================================================================
 # FUNCTIONS SCRAPE HTML
 # ========================================================================
 
 # @decorator_start_end
 def get_html_urllib(url:str = "https://chihuahuaspin.com/")->str:
-	request_site = Request(url, headers={"User-Agent": "Mozilla/5.0"})
+	request_site = request_urllib(url, headers={"User-Agent": "Mozilla/5.0"})
 	page = urlopen(request_site)
 
 	html = (page.read().decode(("utf-8")))
@@ -82,7 +128,7 @@ def get_html_urllib(url:str = "https://chihuahuaspin.com/")->str:
 
 # @decorator_start_end
 def get_html_request(url:str = "https://chihuahuaspin.com/")->bs:
-	response:requests.Response = requests.get(url)
+	response:requests_web.Response = requests_web.get(url)
 	soup:bs = bs(response.text, 'html.parser')
 	return soup
 

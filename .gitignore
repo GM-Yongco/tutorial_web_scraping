@@ -11,5 +11,7 @@ e.txt
 *.jpg
 *.jpeg
 
+temp.*
+
 00_Area51.py
 template_test.py
