@@ -70,7 +70,7 @@ def download_img(
 	except Exception as e:
 		print(e)
 
-def download_img_requests_1(
+def download_img_requests_stream(
 		url:str = "https://cmdxd98sb0x3yprd.mangadex.network/data/6a1dc564d87990ecac5f35603d1e6079/1-3638507e77498c1bae0e9fde1a1da2a360cf34b78228f9eeacd8c129931f0bdc.jpg", 
 		file_name:str = "a.png"
 	) -> None:
@@ -93,7 +93,7 @@ def download_img_requests_1(
 	else:
 	    print("Image downloaded successfully!")
 
-def download_img_requests_2(
+def download_img_requests(
 		url:str = "https://cmdxd98sb0x3yprd.mangadex.network/data/6a1dc564d87990ecac5f35603d1e6079/1-3638507e77498c1bae0e9fde1a1da2a360cf34b78228f9eeacd8c129931f0bdc.jpg", 
 		file_name:str = "a.png"
 	) -> None:
