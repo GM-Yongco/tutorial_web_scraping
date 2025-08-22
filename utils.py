@@ -7,6 +7,7 @@
 # ========================================================================
 
 import os
+from io import TextIOWrapper
 
 import requests as req
 from bs4 import BeautifulSoup as bs
@@ -22,26 +23,30 @@ def section(section_name:str = "SECTION") -> None:
 
 def write(content:str = "test", file_name:str = "temp.txt") -> None:
 	try:
-		if not os.path.exists(file_name):
-			with open(file_name, "w", encoding="utf-8") as f:
-				f.write("")
+		# checking and creation of text file
+		if(os.path.exists(file_name) == False):
+			the_file:TextIOWrapper = open(file_name, "x")
+			the_file.close
 
 		# encoding='utf-8' to catch the error with sites that have characters the charmap cant handle
-		with open(file_name, "w", encoding="utf-8") as f:
-			f.write(str(content))
+		the_file:TextIOWrapper = open(file_name, "w", encoding='utf-8')
+		the_file.write(str(content))
+		the_file.close
 	except Exception as e:
 		section(f"ERROR IN {'write':20}\n{e}")
 
 def read(file_name:str = "temp.txt")->str:
 	content = ""
 	try:
-		if not os.path.exists(file_name):
-			with open(file_name, "w", encoding="utf-8") as f:
-				f.write("")
+		# checking and creation of text file
+		if(os.path.exists(file_name) == False):
+			the_file:TextIOWrapper = open(file_name, "x")
+			the_file.close
 
 		# encoding='utf-8' to catch the error with sites that have characters the charmap cant handle
-		with open(file_name, "r", encoding="utf-8") as f:
-			content:str = f.read()
+		the_file:TextIOWrapper = open(file_name, "r", encoding='utf-8')
+		content:str = the_file.read()
+		the_file.close
 	except Exception as e:
 		content = ""
 		section(f"ERROR IN {'read':20}\n{e}")
