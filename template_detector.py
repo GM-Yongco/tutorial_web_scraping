@@ -12,30 +12,29 @@
 from typing import Callable, List
 from utils import section, read, write
 
-from fetch_data_manga_xbato import fetch_data_sitting_next_to_me, fetch_data_our_sunny_days
+
+from template_model_data import ModelData
 from fetch_data_manga_mangadex import fetch_data_tgswiiwagaa
+from fetch_data_manga_xbato import fetch_data_sitting_next_to_me, fetch_data_our_sunny_days
 
 # ========================================================================
 # CLASS
 # ========================================================================
 
 class DetectorDataUpdates():
-	def __init__(
-			self, TOKEN:str = "", 
-			LOG_CHANNEL_ID:str = ""
-		) -> None:
+	def __init__(self) -> None:
 		self.fetch_data_function_list:List[Callable] = []
 
 	def is_new_record(
 			self,
-			fetch_data:Callable
+			data:ModelData
 		) -> bool:
 		
 		ret_val:bool = False
 
-		file_name:str = "temp_" + fetch_data.__name__ + ".txt"
+		file_name:str = "temp_" + data.data_label + ".txt"
 		old_record:str = read(file_name)
-		new_record:str = fetch_data()
+		new_record:str = data.data
 
 		# is true when old doesnt coencide with new
 		if new_record == "":
@@ -54,10 +53,12 @@ class DetectorDataUpdates():
 	def fetch_data(self)->None:
 		for fetch_data_function in self.fetch_data_function_list:
 			try:
-				if self.is_new_record(fetch_data_function):
-					print(f"YEA BABY, NEW CHAPTER in {fetch_data_function.__name__}")
+				data:ModelData = fetch_data_function()
+				if self.is_new_record(data = data):
+					print(f"YEA BABY, NEW CHAPTER in {data.data_label}")
+					print(data.data)
 				else:
-					print(f"no new chapter :((( in {fetch_data_function.__name__}")
+					print(f"no new chapter :((( in {data.data_label}")
 			except Exception as e:
 				section(f"ERROR PROCESSING {f'{fetch_data_function.__name__}':20}\n{e}")
 		

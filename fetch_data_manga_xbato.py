@@ -12,6 +12,8 @@
 from utils import get_soup
 from bs4 import BeautifulSoup as bs
 
+from template_model_data import ModelData
+
 # ========================================================================
 # FETCH RELEVANT DATA
 # ========================================================================
@@ -28,22 +30,28 @@ from bs4 import BeautifulSoup as bs
 
 def fetch_data_xbato(
 		manga_id:str = "3041986"
-	)->str:
-	ret_val:str = ""
+	)->ModelData:
+	ret_val:ModelData = ModelData()
+	ret_val.data = ""
+
 	url_base:str = "https://mto.to/chapter"
 	url:str = rf"{url_base}/{manga_id}"
 
 	soup:bs = get_soup(link=url)
 	soup:bs = soup.select("optgroup option")[-1]
 
-	ret_val += f"Title: {soup.get_text().strip()}"
-	ret_val += "\n"
-	ret_val += f"Link: https://mto.to/chapter/{soup.get('value').strip()}"
+	ret_val.data += f"Title: {soup.get_text().strip()}"
+	ret_val.data += "\n"
+	ret_val.data += f"Link: https://mto.to/chapter/{soup.get('value').strip()}"
 
 	return ret_val
 
-def fetch_data_sitting_next_to_me()->str:
-	return fetch_data_xbato()
+def fetch_data_sitting_next_to_me()->ModelData:
+	ret_val:ModelData = fetch_data_xbato("3041986")
+	ret_val.data_label = "sitting_next_to_me"
+	return ret_val
 
-def fetch_data_our_sunny_days()->str:
-	return fetch_data_xbato("2428150")
+def fetch_data_our_sunny_days()->ModelData:
+	ret_val:ModelData = fetch_data_xbato("2428150")
+	ret_val.data_label = "our_sunny_days"
+	return ret_val
